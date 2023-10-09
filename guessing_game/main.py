@@ -2,11 +2,26 @@
 
 import random
 import os
-from resources import logo, stages, win
+import sys
+from getopt import getopt
+from resources import logo, stages, win, win_text, lose_text, welcome_text, guess_text
 from words import word_list
 
-print(logo)
-print(input("Press any key to start..."))
+# EN by default
+lang_opt = "en"
+
+opts, args = getopt(sys.argv[1:],'l:',['language='])
+for option, argument in opts:
+    if option == '-l':
+        lang_opt = argument.lower()
+
+if lang_opt == "pl":
+    lang = 1
+else:
+    lang = 0
+
+print(logo[lang])
+print(input(welcome_text[lang]))
 os.system('clear')
 
 word = random.choice(word_list)
@@ -24,7 +39,7 @@ while guess_count > 0 and not all_letters_known:
     print("\n")
     print(stages[guess_count])
     
-    guess = input("Podaj literkę: ").lower()
+    guess = input(guess_text[lang]).lower()
     
     os.system('clear')
 
@@ -44,7 +59,7 @@ print("\n")
 
 if all_letters_known:
     print(win)
-    print("You win :)")
+    print(win_text[lang])
 else:
     print(stages[0])
-    print("You lose :(")
+    print(lose_text[lang])
