@@ -24,7 +24,7 @@ while guess_count > 0 and not all_letters_known:
     print("\n")
     print(stages[guess_count])
     
-    guess = input("Guess a letter: ").lower()
+    guess = input("Podaj literkę: ").lower()
     
     os.system('clear')
 
